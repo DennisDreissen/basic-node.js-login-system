@@ -1,0 +1,77 @@
+body {
+    background-color: #3498DB;
+    padding: 50px;
+}
+
+.jumbotron {
+    text-align: center;
+    width: 30rem;
+    border-radius: 0.5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: 4rem auto;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.container .glyphicon-user {
+    font-size: 8rem;
+    margin-top: 3rem;
+    color: #3498DB;
+}
+
+input {
+    margin-bottom: 12px;
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 0.7px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 100%;
+}
+
+input:focus {
+    border: 0.7px solid #3498DB;
+    box-shadow: none;
+}
+
+.btn {
+    margin-bottom: 3rem;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 100%;
+    background-color: #3498DB;
+    border-color: #3498DB;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+    background-color: #007DD1;
+    border-color: #007DD1;
+}
+
+a:link {
+    color: #3498DB;
+}
+
+a:visited {
+    color: #3498DB;
+}
+
+a:hover {
+    color: #007DD1;
+}
+
+a:active {
+    color: #3498DB;
+}
+
+h2 {
+    margin-bottom: 3rem;
+    font-weight: bold;
+    color: #ababab;
+}
