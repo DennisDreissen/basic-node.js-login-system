@@ -11,26 +11,29 @@ var account  = new accounts();
 
 module.exports = function ( app ) {
 
-    app.get( '/', account.identified,
+    app.get( '/', account.authenticated,
         function( req, res ) {
             res.render( 'index', { email: req.session.email } );
         }
     );
-    
-    app.get( '/logout', account.identified, account.logout );
+   
+    /**
+     * Login.
+     */
 
-    app.get( '/login', account.not_identified,
-        function( req, res ) {
-            res.render( 'login/login' );
-        }
-    );
-    
-    app.get( '/register', account.not_identified,
-        function( req, res ) {
-            res.render( 'signup/signup' );
-        }
-    );
-    
-    app.post( '/login', account.not_identified, account.login );
-    app.post( '/register', account.not_identified, account.register );
+    app.get( '/login', account.not_authenticated, account.login );
+    app.post( '/login', account.not_authenticated, account.login );
+
+    /**
+     * Register.
+     */
+
+    app.get( '/register', account.not_authenticated, account.register );
+    app.post( '/register', account.not_authenticated, account.register );
+
+    /**
+     * Logout.
+     */
+
+    app.get( '/logout', account.authenticated, account.logout );
 };

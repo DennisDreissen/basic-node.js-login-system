@@ -25,7 +25,7 @@ var mongodb  = new _mongodb();
 module.exports = function() {
 
     this.login = function ( req, res ) {
-        if ( !req.body.email || !req.body.password ) {
+        if ( req.method === 'GET' || !req.body.email || !req.body.password ) {
             res.render( 'login/login' );
             return;
         }
@@ -50,7 +50,7 @@ module.exports = function() {
     }
 
     this.register = function ( req, res ) {
-        if ( !req.body.email || !req.body.password ) {
+        if ( req.method === 'GET' || !req.body.email || !req.body.password ) {
             res.render( 'signup/signup' );
             return;
         } else if ( req.body.password !== req.body.password2 ) {
@@ -101,7 +101,7 @@ module.exports = function() {
         res.redirect( '/' );
     }
 
-    this.identified = function ( req, res, next ) {
+    this.authenticated = function ( req, res, next ) {
         if ( req.session.userid ) {
             next();
         } else {
@@ -109,7 +109,7 @@ module.exports = function() {
         }
     }
 
-    this.not_identified = function ( req, res, next ) {
+    this.not_authenticated = function ( req, res, next ) {
         if ( req.session.userid ) {
             res.redirect ( '/login' );
         } else {
