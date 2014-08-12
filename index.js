@@ -24,18 +24,11 @@ var app = express();
 http.createServer( app ).listen( 80 );
 
 /**
- * Function the generates a uuid.
+ * Session class.
  */
 
-function genuuid () {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx' . replace( /[xy]/g, function( c ) {
-        var r = ( d + Math.random() * 16 ) % 16 | 0;
-        d = Math.floor( d/ 16 );
-        return ( c == 'x' ? r : ( r & 0x7|0x8 ) ).toString( 16 );
-    });
-    return uuid;
-};
+var _sessions = require( './controllers/sessions' );
+var sessions  = new _sessions( app );
 
 /**
  * Middleware.
@@ -47,22 +40,7 @@ app.set( 'view engine', 'html' );
 app.set( 'views', path.join( __dirname, 'views' ) );
 app.use( bodyParser.json() );
 app.use( cookieParser() );
-app.use( session( 
-    {
-        genid: function( req ) {
-            return genuuid();
-        },
-        secret: '5x7_1@hqu1=xlggug1ch8pgvjvbzc!9hb!3o9q2aw1xunoy70-',
-        cookie: { secure: false },
-        saveUninitialized: true,
-        resave: true
-    } 
-));
-app.use( bodyParser.urlencoded(
-    {
-        extended: true
-    }
-));
+app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 /**
