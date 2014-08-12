@@ -12,11 +12,25 @@ var bcrypt = require( 'bcrypt' );
 var BCRYPT_WORK_FACTOR = 12;
 
 /**
- * Mingodb class.
+ * Mongodb class.
  */
 
 var _mongodb = require( './mongodb' );
 var mongodb  = new _mongodb();
+
+/**
+ * Mailer class.
+ */
+
+var _mailer = require( './mailer' );
+var mailer  = new _mailer( 
+    { 
+        host: "smtp.mandrillapp.com", 
+        port: 587, 
+        user: "password", 
+        pass: "username" 
+    } 
+);
 
 /**
  * Exported functions.
@@ -89,6 +103,14 @@ module.exports = function() {
                         }
 
                         res.render( 'signup/signup', { success: "Account created" } );
+                        mailer.mail (
+                            {
+                                from: "info@example.com",
+                                to: validator.escape( req.body.email ),
+                                subject: "Account created!",
+                                html: "Hello!<br><br>We have created your account. You can now log in at example.com with your email (" + validator.escape( req.body.email ) + ") and your password."
+                            }
+                        );
                     });
                 });
             });
